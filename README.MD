@@ -17,16 +17,14 @@ MINT Gen AI NFT is a Django web application that allows users to generate and mi
 ```
 git clone https://github.com/Sitanshuk/GenAI_NFT_Minting.git
 ```
-
-2. Navigate to the project directory:
+2. Install dependencies:
+```
+pip install -r requirements.txt
+```
+3. Navigate to the project directory:
 
 ```
 cd GenAI_NFT_Minting
-```
-
-3. Install dependencies:
-```
-pip install -r requirements.txt
 ```
 4. Run migrations:
 ```
@@ -67,7 +65,7 @@ The NFT smart contract used in this project has been deployed on the [Ethereum](
 ## Contributors
 
 - [Sitanshu Kushwaha](https://github.com/Sitanshuk)
-- [Yash Amin]()
+- [Yash Amin](https://github.com/Yash-5865)
 
 ## License
 
