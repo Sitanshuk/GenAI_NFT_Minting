@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINT Gen AI NFT</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #image-container {
+    margin-top: 20px;
+  }
+  #generated-nft {
+    margin-top: 20px;
+  }
+  #emptyCanvas {
+    border: 1px solid #000;
+    width: 200px;
+    height: 200px;
+  }
+  #mint-button {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <h2>Generate an NFT</h2>
+
+  <form id="GetDesc" action="" method="POST">
+    {% csrf_token %}
+    <label for="description">Enter a description:</label><br>
+    <input type="text" id="description" name="description"><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="image-container">
+    {% if image_data %}
+      <div id="generated-nft">
+        <h3>Generated NFT:</h3>
+        <img src="data:image/jpeg;base64,{{ image_data }}" alt="Generated NFT" style="width: 200px;">
+      </div>
+      <form id="mint-form" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="image_data" value="{{ image_data }}">
+        <label for="address">Address to Mint NFT On:</label><br>
+        <input type="text" id="address" name="address"><br><br>
+        <button id="mint-button" type="submit">Mint NFT</button>
+      </form>
+    {% else %}
+      <h3>Generated NFT:</h3>
+      <canvas id="emptyCanvas"></canvas>
+    {% endif %}
+  </div>
+
+    <p id="nft-minted" style="display: none;">NFT Minted!</p>
+</div>
+
+<script>
+document.getElementById("mint-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  // Submit the form using AJAX
+  var formData = new FormData(this);
+  fetch('', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      // Handle success response
+      console.log("NFT Minted successfully");
+      // Optionally, you can redirect the user or show a success message here
+      document.getElementById("nft-minted").style.display = "block";
+    } else {
+      // Handle error response
+      console.error("Failed to mint NFT");
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+});
+</script>
+
+</body>
+</html>
