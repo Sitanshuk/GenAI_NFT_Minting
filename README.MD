@@ -15,7 +15,7 @@ MINT Gen AI NFT is a Django web application that allows users to generate and mi
 1. Clone the repository:
 
 ```
-git clone https://github.com/your_username/mint-gen-ai-nft.git
+git clone https://github.com/Sitanshuk/GenAI_NFT_Minting.git
 ```
 
 2. Navigate to the project directory:
